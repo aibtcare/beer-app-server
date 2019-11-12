@@ -1,16 +1,18 @@
 const axios = require("axios")
 const { BREWERY_DB_KEY: key } = require("../config/constants")
-const getBeer = async () => {
+
+const getBeers = async ({ name = "", abv = "" }) => {
+	const params = {
+		name,
+		key,
+		abv
+	}
 	try {
 		const res = await axios.get(
 			"https://sandbox-api.brewerydb.com/v2/beers/",
-			{
-				params: {
-					name: "bud light",
-					key
-				}
-			}
+			{ params }
 		)
+		console.log(res)
 		return res.data.data
 	} catch (err) {
 		console.log(err)
@@ -18,5 +20,5 @@ const getBeer = async () => {
 }
 
 module.exports = {
-	getBeer
+	getBeers
 }

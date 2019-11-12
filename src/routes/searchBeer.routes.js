@@ -2,9 +2,16 @@ const route = require("express").Router()
 const SearchBeerController = require("../controllers/SearchBeer.controllers")
 
 module.exports = app => {
-	route.get("/", async (req, res) => {
-		const allBeer = await SearchBeerController.getAllBeer()
-		res.json(allBeer)
+	route.get("/name", async (req, res) => {
+		const { name } = req.body
+		const beerResponse = await SearchBeerController.getBeerByName(name)
+		res.json(beerResponse)
+	})
+
+	route.get("/abv", async (req, res) => {
+		const { abv } = req.body
+		const beerResponse = await SearchBeerController.getBeerByAbv(abv)
+		res.json(beerResponse)
 	})
 
 	app.use("/search-beer", route)

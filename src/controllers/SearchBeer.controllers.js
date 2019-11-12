@@ -1,9 +1,14 @@
 const BreweryDbService = require("../services/BreweryDb.services")
 
-const getAllBeer = async () => {
-	return await BreweryDbService.getBeer()
+const getBeerByName = async name => {
+	return await BreweryDbService.getBeers({ name })
+}
+
+const getBeerByAbv = async abv => {
+	return await BreweryDbService.getBeers({ abv })
 }
 
 module.exports = {
-	getAllBeer
+	getBeerByName,
+	getBeerByAbv
 }
